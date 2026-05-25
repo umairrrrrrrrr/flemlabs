@@ -40,7 +40,7 @@ const ChatAssistant: React.FC = () => {
         text,
         timestamp: new Date()
       }]);
-    }, 1500);
+    }, 900);
   };
 
   const handleSend = (text: string) => {
@@ -57,15 +57,19 @@ const ChatAssistant: React.FC = () => {
 
     // Contextual Simulated Responses
     if (query.includes('order') || query.includes('place') || query.includes('buy')) {
-      triggerBotResponse('To place an order, head to our Services page or Pricing tiers, select the package that fits your goals, and complete the check-out forms. You can track its production in real-time on your dashboard!');
+      triggerBotResponse('To place a commission, head to our Services page or Pricing tiers, select the package that fits your goals, and complete the check-out forms. You can track its production timeline in real-time on your dashboard!');
     } else if (query.includes('price') || query.includes('cost') || query.includes('rate')) {
-      triggerBotResponse('Our services are structured in Basic, Standard, and Pro tiers to suit various budgets. Custom quotes can also be configured by filling out our custom request forms.');
+      triggerBotResponse('Our premium services are structured in Basic, Standard, and Pro tiers to suit various budgets. You can review them in detail on our Pricing page.');
     } else if (query.includes('portfolio') || query.includes('work') || query.includes('art')) {
-      triggerBotResponse('Our full showcase is available on the Portfolio page. We feature 2D sprites, low-poly 3D props, full rigs, novel illustation book covers, and minimalist branding concepts.');
+      triggerBotResponse('Our master showcase is available on the Portfolio page. We feature pixel art, low-poly 3D props, character rigs, cinematic illustrations, and minimalist branding concepts.');
     } else if (query.includes('contact') || query.includes('email') || query.includes('phone') || query.includes('location')) {
-      triggerBotResponse('You can contact us directly through the Contact Page form, email us at muhammadumairshake@gmail.com, or drop by our studio at Air University E-9 Islamabad, Pakistan.');
+      triggerBotResponse('You can contact us directly through the Contact Page form, email us at muhammadumairshake@gmail.com, or visit our studio at Air University E-9 Islamabad, Pakistan.');
+    } else if (query.includes('wallet') || query.includes('metamask') || query.includes('crypto') || query.includes('eth')) {
+      triggerBotResponse('flemlabs is a fully Web3-enabled digital art agency! You can connect your MetaMask wallet using the "Connect Wallet" button on our floating header navbar. If you don\'t have a wallet, we also support an automated sandbox simulator for testing.');
+    } else if (query.includes('escrow') || query.includes('secure') || query.includes('safety') || query.includes('cancel')) {
+      triggerBotResponse('All transactions are secured in our high-end studio escrow ledger. The creative team accepts commissions after verify sign-offs, and you can request escrow refunds directly from your orders history tab.');
     } else {
-      triggerBotResponse('Thank you for reaching out. A senior design producer will review your details shortly and follow up. In the meantime, feel free to browse our services and portfolio catalogs.');
+      triggerBotResponse('Thank you for reaching out to flemlabs support. A senior design producer will review your query shortly and follow up. In the meantime, feel free to inspect our services and portfolio catalogs.');
     }
   };
 
@@ -167,6 +171,12 @@ const ChatAssistant: React.FC = () => {
               className="text-[10px] bg-surface-dark hover:bg-cream/10 border border-cream/15 text-cream-light rounded-full px-3 py-1 transition-all duration-300"
             >
               Services info?
+            </button>
+            <button
+              onClick={() => handleSend('How do I connect my MetaMask crypto wallet?')}
+              className="text-[10px] bg-surface-dark hover:bg-cream/10 border border-cream/15 text-cream-light rounded-full px-3 py-1 transition-all duration-300"
+            >
+              Connect Wallet?
             </button>
           </div>
 
