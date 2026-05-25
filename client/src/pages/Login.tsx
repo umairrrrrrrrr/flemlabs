@@ -191,7 +191,6 @@ const Login: React.FC = () => {
             </button>
           </form>
 
-          {/* Toggle view text */}
           <div className="text-center pt-2">
             <button
               onClick={() => {
@@ -203,17 +202,6 @@ const Login: React.FC = () => {
               {isLoginView ? "Create a new portfolio account" : "I have credentials, log in"}
             </button>
           </div>
-        </div>
-
-        {/* Demo Credentials Tip Box */}
-        <div className="mt-4 bg-surface-dark border border-cream/10 p-3.5 rounded-2xl text-center space-y-1">
-          <span className="text-[9px] font-bold uppercase tracking-widest text-cream block flex items-center justify-center gap-1.5">
-            <ShieldCheck size={12} className="text-cream" />
-            Sandbox Testing Guidelines
-          </span>
-          <p className="text-[10px] text-gray-500 font-light leading-relaxed">
-            Log in with the pre-seeded admin user: <span className="text-cream font-bold">admin@flemlabs.com</span> and password: <span className="text-cream font-bold">admin123</span> to manage user reviews and edit/accept/cancel escrow orders instantly!
-          </p>
         </div>
       </motion.div>
     </div>
