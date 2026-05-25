@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User as UserIcon, ShieldAlert } from 'lucide-react';
+import { LogOut, User as UserIcon, ShieldAlert, Wallet } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, walletAddress, connectWallet, disconnectWallet } = useAuth();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -62,8 +62,31 @@ const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* Auth status buttons */}
+        {/* Auth & Wallet status buttons */}
         <div className="flex items-center gap-4">
+          {/* Connect Wallet Button */}
+          {walletAddress ? (
+            <div className="flex items-center gap-2 bg-surface-dark/80 border border-emerald-500/25 text-emerald-400 px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-mono shadow-[0_0_12px_rgba(16,185,129,0.1)]">
+              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
+              <span>{walletAddress.substring(0, 6)}...{walletAddress.substring(walletAddress.length - 4)}</span>
+              <button 
+                onClick={disconnectWallet}
+                className="text-[9px] text-gray-500 hover:text-rose-400 transition-colors ml-1.5 font-sans uppercase font-bold tracking-wider"
+                title="Disconnect Wallet"
+              >
+                disconnect
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => connectWallet()}
+              className="border border-cream/20 hover:border-cream/50 text-cream-light font-medium text-xs px-4 py-1.5 rounded-full flex items-center gap-1.5 transition-all duration-300 hover:bg-white/5 active:scale-95 shadow-[0_0_10px_rgba(222,219,200,0.02)]"
+            >
+              <Wallet size={12} />
+              <span>Connect Wallet</span>
+            </button>
+          )}
+
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-cream-dark bg-surface-dark px-3 py-1 rounded-full border border-cream/10">

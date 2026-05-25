@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ShieldCheck, Wallet, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface MetamaskModalProps {
   isOpen: boolean;
@@ -9,7 +10,7 @@ interface MetamaskModalProps {
 }
 
 const MetamaskModal: React.FC<MetamaskModalProps> = ({ isOpen, onClose, priceUSD, onSuccess }) => {
-  const [walletAddress, setWalletAddress] = useState<string>('');
+  const { walletAddress, connectWallet } = useAuth();
   const [isConnecting, setIsConnecting] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentStep, setPaymentStep] = useState<'idle' | 'signing' | 'broadcasting' | 'mining' | 'success'>('idle');
@@ -27,32 +28,8 @@ const MetamaskModal: React.FC<MetamaskModalProps> = ({ isOpen, onClose, priceUSD
 
   const handleConnect = async () => {
     setIsConnecting(true);
-    
-    // Simulating delay for organic Web3 handshake
-    setTimeout(async () => {
-      const ethereum = (window as any).ethereum;
-      
-      if (hasProvider && ethereum) {
-        try {
-          // Request account access from real metamask extension
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          if (accounts && accounts[0]) {
-            setWalletAddress(accounts[0]);
-            setIsConnecting(false);
-            return;
-          }
-        } catch (err) {
-          console.warn('Real Metamask connection rejected, falling back to simulated engine.', err);
-        }
-      }
-
-      // Fallback Simulator (Robust zero-setup)
-      const mockAddress = '0x' + Array.from({ length: 40 }, () => 
-        '0123456789abcdef'[Math.floor(Math.random() * 16)]
-      ).join('');
-      setWalletAddress(mockAddress);
-      setIsConnecting(false);
-    }, 1200);
+    await connectWallet();
+    setIsConnecting(false);
   };
 
   const handlePay = async () => {

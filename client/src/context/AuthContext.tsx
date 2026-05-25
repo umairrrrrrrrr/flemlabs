@@ -10,6 +10,9 @@ interface AuthContextType {
   register: (token: string, userData: User) => void;
   logout: () => void;
   refreshUser: () => Promise<void>;
+  walletAddress: string | null;
+  connectWallet: () => Promise<string | null>;
+  disconnectWallet: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,6 +45,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+
   useEffect(() => {
     const storedToken = localStorage.getItem('flemlabs_token');
     if (storedToken) {
@@ -50,7 +55,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } else {
       setIsLoading(false);
     }
+
+    const storedWallet = localStorage.getItem('flemlabs_wallet');
+    if (storedWallet) {
+      setWalletAddress(storedWallet);
+    }
   }, []);
+
+  const connectWallet = async (): Promise<string | null> => {
+    const ethereum = (window as any).ethereum;
+    if (ethereum) {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        if (accounts && accounts[0]) {
+          localStorage.setItem('flemlabs_wallet', accounts[0]);
+          setWalletAddress(accounts[0]);
+          return accounts[0];
+        }
+      } catch (err) {
+        console.warn('Metamask connection failed, using sandbox mode.', err);
+      }
+    }
+    
+    // Web3 Sandbox Simulator fallback
+    const mockAddress = '0x' + Array.from({ length: 40 }, () => 
+      '0123456789abcdef'[Math.floor(Math.random() * 16)]
+    ).join('');
+    localStorage.setItem('flemlabs_wallet', mockAddress);
+    setWalletAddress(mockAddress);
+    return mockAddress;
+  };
+
+  const disconnectWallet = () => {
+    localStorage.removeItem('flemlabs_wallet');
+    setWalletAddress(null);
+  };
 
   const login = (jwtToken: string, userData: User) => {
     localStorage.setItem('flemlabs_token', jwtToken);
@@ -86,7 +125,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       login,
       register,
       logout,
-      refreshUser
+      refreshUser,
+      walletAddress,
+      connectWallet,
+      disconnectWallet
     }}>
       {children}
     </AuthContext.Provider>
