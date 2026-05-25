@@ -141,7 +141,7 @@ class JSONModel {
 
 // Connect function
 const connectDB = async () => {
-  const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/flemlabs';
+  const mongoURI = process.env.MONGO_URI || process.env.DATABASE_URL || 'mongodb://localhost:27017/flemlabs';
   try {
     mongoose.set('strictQuery', false);
     // Connect with a 3-second timeout so it fails quickly if MongoDB is not installed
