@@ -50,7 +50,7 @@ Make sure you have Node.js (Version 16 or newer) installed on your machine. (Mon
 ### 1. Extract and Navigate
 Open your shell terminal (PowerShell, Command Prompt, or Bash) in the project root folder:
 ```bash
-cd "c:\Users\Araiz\Downloads\web assignment ide"
+cd flemlabs
 ```
 
 ### 2. Install Project Dependencies
@@ -101,35 +101,3 @@ You can register any new customer account directly from the register portal!
 
 5. **Production Timelines Trackers**
    - Every customer can monitor active commissions via their track dashboard. As the Admin updates the status in the command panel, the timeline immediately advances with glowing neon nodes. If cancelled, it collapses into a detailed termination summary citing administrative decline reasons.
-
----
-
-## Presentation Slides Outline (Gain 10 Marks CLO-3)
-
-To assist with your required presentation and slide uploads, here is the recommended structure for your slides:
-
-### Slide 1: Cover Page
-- **Title**: flemlabs: Immersive Digital Art Commission Portal
-- **Sub-header**: Full-Stack Premium Atelier platform for Elite Agencies
-- **Info**: [Your Name, Roll Number, Class Coordinates]
-
-### Slide 2: The Creative Brief & Architectural Stack
-- **Design System**: Cinematic Dark Minimalism (Pitch Black #000000, Cream #E1E0CC, Warm Accent #DEDBC8, Almarai & Instrument Serif font styling). Fully responsive mobile menu drawer.
-- **Core Stack**: React 18, Vite, TypeScript, Tailwind CSS, Framer Motion, Node.js + Express, Mongoose + MongoDB Atlas.
-- **Robust Feature**: Zero-Setup Hybrid DB (Auto JSON fallback if local MongoDB is offline).
-
-### Slide 3: Client Handshake & Portfolios
-- **Filterable Showcase**: Masonry layout instantly sorting 2D Art, 3D models, illustrations, logos, streetwear vectors, and typography settings.
-- **Future-Proofing**: Interactive placeholder uploader to dynamically append new artwork items.
-
-### Slide 4: Unified Commission Center
-- **Dynamic Rates Calculation**: Automatically maps USD pricing when toggling service listings and packages (Basic / Standard / Pro).
-- **Web3 Payments**: Integrated MetaMask cryptographically secure personal signature validation blocks and ledger transactions.
-
-### Slide 5: Command Center Admin Panel
-- **SaaS Analytics**: Stat cards reflecting Total Sales, Orders, Average test ratings, and review moderators.
-- **CRUD Operations**: Interactive control table pipelines to Accept, Initiate Production, Deliver, or decline/cancel commissions.
-
----
-
-Curated with passion by Antigravity (Google DeepMind Team). High-fidelity, cinematic Web3 experiences.
