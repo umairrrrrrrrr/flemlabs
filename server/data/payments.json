@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "7emfd761mmpjzlezd",
+    "createdAt": "2026-05-24T16:23:31.609Z",
+    "orderId": "mrnkamm96mpjzleyz",
+    "customerId": "x3uimo8i2mpjuwtqm",
+    "amount": 120,
+    "paymentMethod": "Card",
+    "cardLast4": "3123",
+    "status": "Paid"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "dt4757jwjmpjxi3lg",
+    "createdAt": "2026-05-24T15:24:57.652Z",
+    "userId": "60c72b2f9b1d8b0015f6de01",
+    "userName": "Helena Vance",
+    "rating": 5,
+    "comments": "flemlabs represents the absolute pinnacle of digital craftsmanship. The low-poly environment designs exceeded our expectations, and the cinematic aesthetics matched our high-end game vision perfectly. Simply unmatched."
+  },
+  {
+    "_id": "y7mknpif2mpjxi3lh",
+    "createdAt": "2026-05-24T15:24:57.653Z",
+    "userId": "60c72b2f9b1d8b0015f6de02",
+    "userName": "Kaelen Thorne",
+    "rating": 5,
+    "comments": "The anime-style character renders were detailed and delivered days ahead of schedule. Their attention to lighting overlays and clean separations sets them apart as a true luxury digital art studio."
+  },
+  {
+    "_id": "nokz374jmmpjxi3lh",
+    "createdAt": "2026-05-24T15:24:57.653Z",
+    "userId": "60c72b2f9b1d8b0015f6de03",
+    "userName": "Seraphina Vance",
+    "rating": 5,
+    "comments": "Our streetwear brand has seen immediate attention since adopting flemlabs designs. The custom typography and vector layout illustrations are exceptionally premium."
+  },
+  {
+    "_id": "rev-aria-chen-04",
+    "createdAt": "2026-05-24T15:49:10.000Z",
+    "userId": "60c72b2f9b1d8b0015f6de04",
+    "userName": "Aria Chen",
+    "rating": 5,
+    "comments": "The volume rendering simulations flemlabs created for our cinematic trailer were absolute art. No generic presets, just pure hand-crafted dynamics that made our launch video pop. Literally the easiest project integration we've ever done."
+  },
+  {
+    "_id": "rev-lucas-sterling-05",
+    "createdAt": "2026-05-24T15:49:11.000Z",
+    "userId": "60c72b2f9b1d8b0015f6de05",
+    "userName": "Lucas Sterling",
+    "rating": 5,
+    "comments": "Collaborated with flemlabs on our limited-edition winter streetwear capsule. Their typography pacing and vector layout compositions are incredibly clean. Complete escrow transparency made the entire commission process a breeze."
+  },
+  {
+    "_id": "rev-nadia-petrov-06",
+    "createdAt": "2026-05-24T15:49:12.000Z",
+    "userId": "60c72b2f9b1d8b0015f6de06",
+    "userName": "Nadia Petrov",
+    "rating": 5,
+    "comments": "Honestly, their custom 3D character rigs are top-tier. Mesh topology was perfectly clean, retopologies were optimized for Unreal Engine, and the blendshapes are incredibly expressive. They are our go-to studio now."
+  }
+]

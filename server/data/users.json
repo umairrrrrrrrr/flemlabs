@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "x3uimo8i2mpjuwtqm",
+    "createdAt": "2026-05-24T14:12:25.870Z",
+    "name": "flemlabs Admin",
+    "email": "admin@flemlabs.com",
+    "password": "$2a$10$hzoURNIrAswbJTMj0zPQcOMPwbKm8Ckz.m2cuJSmDPiq8H6ucxHVW",
+    "role": "admin"
+  }
+]
