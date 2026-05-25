@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { Service, Order } from '../types';
 import MetamaskModal from '../components/MetamaskModal';
-import { Loader2, Calendar, Compass, ShieldAlert, CreditCard, ShieldCheck, CheckCircle2, ChevronRight, XCircle } from 'lucide-react';
+import { Loader2, Calendar, Compass, ShieldAlert, ShieldCheck, CheckCircle2, ChevronRight, XCircle } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,12 +30,7 @@ const Orders: React.FC = () => {
   const [selectedTier, setSelectedTier] = useState<'Basic' | 'Standard' | 'Pro'>('Basic');
   const [requirements, setRequirements] = useState('');
   const [refImageUrl, setRefImageUrl] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'Card' | 'Crypto'>('Card');
-
-  // Credit Card mock inputs
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardExpiry, setCardExpiry] = useState('');
-  const [cardCVV, setCardCVV] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<'Crypto'>('Crypto');
 
   // Orders list history
   const [orders, setOrders] = useState<Order[]>([]);
@@ -141,12 +136,7 @@ const Orders: React.FC = () => {
       return;
     }
 
-    if (paymentMethod === 'Crypto') {
-      setIsWeb3ModalOpen(true);
-    } else {
-      // Direct Card checkout process
-      processFinalOrder('Card', '0000_DUMMY_CARD_TXN');
-    }
+    setIsWeb3ModalOpen(true);
   };
 
   const handleWeb3Success = (hash: string) => {
@@ -154,7 +144,7 @@ const Orders: React.FC = () => {
     processFinalOrder('Crypto', hash);
   };
 
-  const processFinalOrder = async (method: 'Card' | 'Crypto', txnProof: string) => {
+  const processFinalOrder = async (method: 'Crypto', txnProof: string) => {
     setPlacingOrder(true);
     try {
       // 1. Submit Order
@@ -189,8 +179,7 @@ const Orders: React.FC = () => {
             orderId,
             amount: activePrice,
             paymentMethod: method,
-            cardLast4: method === 'Card' ? cardNumber.substring(cardNumber.length - 4) || '1111' : undefined,
-            txHash: method === 'Crypto' ? txnProof : undefined
+            txHash: txnProof
           })
         });
 
@@ -200,9 +189,6 @@ const Orders: React.FC = () => {
         // Reset states
         setRequirements('');
         setRefImageUrl('');
-        setCardNumber('');
-        setCardExpiry('');
-        setCardCVV('');
       }
     } catch (err) {
       console.error('Submit order failed:', err);
@@ -371,79 +357,20 @@ const Orders: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Checkout methods toggles */}
-                    <div className="space-y-3">
-                      <span className="text-[10px] text-gray-500 uppercase tracking-widest font-bold block mb-1">
-                        Secure Payment Gateway
-                      </span>
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          type="button"
-                          onClick={() => setPaymentMethod('Card')}
-                          className={`flex items-center justify-center gap-1.5 text-xs py-3 rounded-xl border font-bold transition-all ${
-                            paymentMethod === 'Card'
-                              ? 'bg-cream/10 border-cream text-cream shadow-md'
-                              : 'bg-surface-dark border-cream/5 text-gray-500 hover:text-cream'
-                          }`}
-                        >
-                          <CreditCard size={14} />
-                          Credit Card
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setPaymentMethod('Crypto')}
-                          className={`flex items-center justify-center gap-1.5 text-xs py-3 rounded-xl border font-bold transition-all ${
-                            paymentMethod === 'Crypto'
-                              ? 'bg-cream/10 border-cream text-cream shadow-md'
-                              : 'bg-surface-dark border-cream/5 text-gray-500 hover:text-cream'
-                          }`}
-                        >
-                          <Compass size={14} />
-                          MetaMask
-                        </button>
+                    {/* Checkout methods info card */}
+                    <div className="space-y-4 border-t border-cream/5 pt-4">
+                      <div className="flex gap-3 bg-cream/5 border border-cream/15 rounded-2xl p-4">
+                        <Compass className="text-cream mt-0.5 flex-shrink-0 animate-pulse" size={18} />
+                        <div>
+                          <span className="text-[10px] text-cream uppercase tracking-widest font-bold block">
+                            Secure Web3 Escrow Gateway
+                          </span>
+                          <p className="text-[11px] text-gray-500 leading-normal font-light mt-1">
+                            Payments are secured in standard escrow on the Ethereum blockchain. Connected MetaMask signature approves transaction transfer hooks automatically.
+                          </p>
+                        </div>
                       </div>
                     </div>
-
-                    {/* Card inputs (If selected) */}
-                    {paymentMethod === 'Card' && (
-                      <div className="space-y-3 border-t border-cream/5 pt-4 animate-fade-in">
-                        <div className="space-y-1">
-                          <label className="text-[9px] text-gray-500 uppercase font-semibold">Card Number</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="4000 1234 5678 9010"
-                            value={cardNumber}
-                            onChange={e => setCardNumber(e.target.value)}
-                            className="w-full bg-black border border-cream/10 rounded-lg p-2.5 text-xs text-cream-light outline-none focus:border-cream/35"
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="space-y-1">
-                            <label className="text-[9px] text-gray-500 uppercase font-semibold">Expiry Date</label>
-                            <input
-                              type="text"
-                              required
-                              placeholder="MM/YY"
-                              value={cardExpiry}
-                              onChange={e => setCardExpiry(e.target.value)}
-                              className="w-full bg-black border border-cream/10 rounded-lg p-2.5 text-xs text-cream-light outline-none"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[9px] text-gray-500 uppercase font-semibold">CVV</label>
-                            <input
-                              type="text"
-                              required
-                              placeholder="123"
-                              value={cardCVV}
-                              onChange={e => setCardCVV(e.target.value)}
-                              className="w-full bg-black border border-cream/10 rounded-lg p-2.5 text-xs text-cream-light outline-none"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Submit Order button */}
                     <button
@@ -454,12 +381,12 @@ const Orders: React.FC = () => {
                       {placingOrder ? (
                         <>
                           <Loader2 className="animate-spin" size={18} />
-                          Processing...
+                          Securing Blockchain Tx...
                         </>
                       ) : (
                         <>
                           <ShieldCheck size={18} />
-                          {paymentMethod === 'Crypto' ? 'Proceed with MetaMask' : 'Place Order'}
+                          Proceed with MetaMask
                         </>
                       )}
                     </button>
